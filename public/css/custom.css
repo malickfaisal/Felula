@@ -1,0 +1,20 @@
+.notification_msg{
+    background-color: #6565bc;
+}
+.border-blue-500{
+    background: cornflowerblue;
+    color: white;
+}
+.border-blue-500:hover{
+    background: rgb(78, 117, 190);;
+    color: white;
+}
+
+.bg-current{
+    background: #757575;
+    color: white;
+}
+.bg-current:hover{
+    background: #535353;
+    color: white;
+}
