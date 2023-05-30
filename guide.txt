@@ -1,0 +1,28 @@
+Step 1:
+Git Clone:
+git clone https://github.com/malickfaisal/Felula.git
+
+Step 2:
+Run command Composer update / Run command Composer install
+
+Step 3:
+Run command npm install
+Run command npm run build
+
+Step 4:
+Rename .env.bak to .env
+Create Database in your localhost
+Add database name in .env file
+
+Step 5:
+Run command PHP artisan migrate
+
+Step 6:
+Run command PHP artisan db:seed
+
+Step 7:
+Run command PHP artisan serve
+
+
+For CSV file: Please find the attached document
+Also File is placed in root folder
