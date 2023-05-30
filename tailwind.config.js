@@ -1,6 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-import forms from '@tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,13 +14,6 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-            colors: {
-                stone: colors.warmGray,
-                sky: colors.lightBlue,
-                neutral: colors.trueGray,
-                gray: colors.coolGray,
-                slate: colors.blueGray,
-            }
         },
     },
 
