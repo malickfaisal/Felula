@@ -6,7 +6,7 @@
             <div>
                 <div class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-7 h-7 stroke-red-500">
-                        <img id="featured_image_preview" class="img object-cover rounded-md" src="{{ isset($blog->featured_image) ? $blog->featured_image : url('/images/no-preview.jpeg') }}" alt="Featured image preview" />
+                        <img id="featured_image_preview" class="img object-cover rounded-md" src="{{ isset($blog->featured_image) && ($blog->featured_image != '') ? $blog->featured_image : url('/images/no-preview.jpeg') }}" alt="Featured image preview" />
                     </svg>
                 </div>
 
