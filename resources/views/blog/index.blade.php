@@ -4,9 +4,9 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ 'Blogs' }}
             </h2>
-            <a href="{{ route('blogs.create') }}" class="bg-current px-4 py-2 rounded-md">Add Blogs</a>
-            <a href="{{ route('blogs.import.rss') }}" class="bg-current px-4 py-2 rounded-md">Import RSS</a>
-            <a href="{{ route('blogs.import.csv') }}" class="bg-current px-4 py-2 rounded-md">Import CSV</a>
+            <a href="{{ route('blogs.create') }}" class="btn-current px-4 py-2 rounded-md">Add Blogs</a>
+            <a href="{{ route('blogs.import.rss') }}" class="btn-current px-4 py-2 rounded-md">Import RSS</a>
+            <a href="{{ route('blogs.import.csv') }}" class="btn-current px-4 py-2 rounded-md">Import CSV</a>
         </div>
     </x-slot>
 

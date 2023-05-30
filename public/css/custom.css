@@ -10,11 +10,11 @@
     color: white;
 }
 
-.bg-current{
+.btn-current{
     background: #757575;
     color: white;
 }
-.bg-current:hover{
+.btn-current:hover{
     background: #535353;
     color: white;
 }
