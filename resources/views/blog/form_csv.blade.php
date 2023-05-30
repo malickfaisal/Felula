@@ -1,19 +1,7 @@
 <x-app-layout>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
-
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <style>
-        .img {
-            width: 128px;
-            border: 1px solid #aba8a8;
-            margin-top: 12px;
-        }
-    </style>
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{-- Use 'Edit' for edit mode and create for non-edit/create mode --}}
-            {{ isset($blog) ? 'Edit' : 'Create' }} Blog
+            Import Blog from CSV
         </h2>
     </x-slot>
 
