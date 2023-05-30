@@ -170,7 +170,7 @@ class BlogController extends Controller
             
             if($create) {
                 // Alert flash for the success notification
-                session()->flash('notif.success', 'Blog created successfully!');
+                session()->flash('notif.success', 'Blog imported successfully!');
                 return redirect()->route('blogs_view');
             }
 
@@ -230,7 +230,7 @@ class BlogController extends Controller
             
             if($create) {
                 // Alert flash for the success notification
-                session()->flash('notif.success', 'Blog created successfully!');
+                session()->flash('notif.success', 'Blog imported successfully!');
                 return redirect()->route('blogs_view');
             }            
         }  
