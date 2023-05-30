@@ -13,7 +13,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{-- Use 'Edit' for edit mode and create for non-edit/create mode --}}
-            {{ isset($blog) ? 'Edit' : 'Create' }}
+            {{ isset($blog) ? 'Edit' : 'Create' }} Blog
         </h2>
     </x-slot>
 
@@ -36,9 +36,13 @@
                         </div>
 
                         <div>
+                            <x-input-label for="short_desc" value="Short Description" />
+                            <x-textarea-input id="short_desc" name="short_desc" class="mt-1 block w-full" required autofocus>{{ $blog->short_desc ?? old('short_desc') }}</x-textarea-input>
+                            <x-input-error class="mt-2" :messages="$errors->get('short_desc')" />
+                        </div>
+                        <div>
                             <x-input-label for="content" value="Content" />
-                            {{-- use textarea-input component that we will create after this --}}
-                            <x-textarea-input id="content" name="content" class="mt-1 block w-full" required autofocus>{{ $blog->content ?? old('content') }}</x-textarea-input>
+                            <x-textarea-input id="content" name="content" class="ckeditor mt-1 block w-full" required autofocus>{{ $blog->content ?? old('content') }}</x-textarea-input>
                             <x-input-error class="mt-2" :messages="$errors->get('content')" />
                         </div>
 

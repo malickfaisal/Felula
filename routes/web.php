@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/blog/{slug}', [FrontController::class, 'blog'])->name('blog');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,9 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Users     
-    Route::get('/users_view', [ProfileController::class, 'edit'])->name('users_view');
-
     //Blogs     
     Route::get('/blogs_view', [BlogController::class, 'index'])->name('blogs_view');
     Route::get('/blogs_show/{id}', [BlogController::class, 'show'])->name('blogs.show');
@@ -39,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/blogs_store', [BlogController::class, 'store'])->name('blogs.store');
     Route::put('/blogs_update/{id}', [BlogController::class, 'update'])->name('blogs_update');
     Route::get('/blogs_delete/{id}', [BlogController::class, 'destroy'])->name('blogs_destroy');
+    
+    //Users     
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__.'/auth.php';
