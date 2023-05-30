@@ -43,7 +43,7 @@ class BlogController extends Controller
         if ($request->hasFile('featured_image')) {
              // store image in the public storage folder
             $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'));
-            $validated['featured_image'] = $filePath;
+            $validated['featured_image'] = url('/').'/storage/'.$filePath;
         }
         
         $validated['user_id'] = Auth::user()->id;
@@ -93,7 +93,7 @@ class BlogController extends Controller
             Storage::disk('public')->delete($blog->featured_image);
 
             $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'), 'public');
-            $validated['featured_image'] = $filePath;
+            $validated['featured_image'] = url('/').'/storage/'.$filePath;
         }        
         $validated['slug'] = Str::slug($request->title);
 
@@ -124,5 +124,56 @@ class BlogController extends Controller
         }
 
         return abort(500);
+    }
+    /**
+     * Show the form for importing rss a new resource.
+     */
+    public function import_rss()
+    {
+        return response()->view('blog.form_rss');
+    }
+
+    /**
+     * Submit form of importing rss in DB.
+     */
+    public function import_rss_submit(Request $request)
+    {
+        echo $rss_url = $request->rss_url;
+        $current_user = Auth::user()->id;
+        $ret = array();
+
+        // retrieve search results 
+        if($xml = simplexml_load_file($rss_url)) {      
+            $result["item"] = $xml->xpath("/rss/channel/item"); 
+            foreach($result as $key => $attribute) { 
+                $i=0; 
+                foreach($attribute as $element) { 
+                    $ret[$i]['title'] = (string)$element->title; 
+                    $ret[$i]['content'] = (string)$element->description; 
+                    $ret[$i]['short_desc'] = (string)$element->description; 
+                    if(isset($element->image)){                    
+                        $ret[$i]['featured_image'] = (string)$element->image; 
+                    }
+                    $ret[$i]['user_id'] = $current_user;
+                    $ret[$i]['slug'] = Str::slug($ret[$i]['title']); 
+                    $ret[$i]['created_at'] = date('Y-m-d H:i:s');  
+                    $ret[$i]['updated_at'] = date('Y-m-d H:i:s'); 
+                    $i++;
+                } 
+            } 
+           // dd($ret);
+            // insert all read rss entries in db
+            $create = Blog::insert($ret);
+            
+            if($create) {
+                // Alert flash for the success notification
+                session()->flash('notif.success', 'Blog created successfully!');
+                return redirect()->route('blogs_view');
+            }
+
+            
+        }  
+        return abort(500);
+        
     }
 }

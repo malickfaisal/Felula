@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/blogs_view', [BlogController::class, 'index'])->name('blogs_view');
     Route::get('/blogs_show/{id}', [BlogController::class, 'show'])->name('blogs.show');
     Route::get('/blogs_create', [BlogController::class, 'create'])->name('blogs.create');
+    Route::get('/blogs_import_rss', [BlogController::class, 'import_rss'])->name('blogs.import.rss');
+    Route::post('/blogs_import_rss_submit', [BlogController::class, 'import_rss_submit'])->name('blogs.import.rss_submit');
     Route::get('/blogs_edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
     Route::post('/blogs_store', [BlogController::class, 'store'])->name('blogs.store');
     Route::put('/blogs_update/{id}', [BlogController::class, 'update'])->name('blogs_update');
