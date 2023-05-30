@@ -24,11 +24,13 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
+        <!-- Demo Email/pw -->
         <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            <label for="" class="items-center">
+                <p class="text-gray-600">Email: admin@felula.com</p>
+                <p class="text-gray-600">Password: 12345678</p>
+                <p class="text-red-600">Note: If above credentials are not working then please run this seed command "php artisan db:seed"</p>
+
             </label>
         </div>
 

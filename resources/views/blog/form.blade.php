@@ -21,7 +21,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{-- don't forget to add multipart/form-data so we can accept file in our form --}}
                     <form method="post" action="{{ isset($blog) ? route('blogs_update', $blog->id) : route('blogs.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                         @csrf
                         {{-- add @method('put') for edit mode --}}

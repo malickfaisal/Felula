@@ -22,10 +22,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form method="post" action="{{ route('blogs.import.csv_submit') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
-                        @csrf
-                                       
-                        <div>
-                            
+                        @csrf                                       
+                        <div>                            
                             <x-input-label for="csv_file" value="Upload CSV" />
                             <label class="block mt-2">
                                 <span class="sr-only">Choose File</span>
