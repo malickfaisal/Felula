@@ -154,6 +154,9 @@ class BlogController extends Controller
                     if(isset($element->image)){                    
                         $ret[$i]['featured_image'] = (string)$element->image; 
                     }
+                    if(isset($element->content)){                    
+                        $ret[$i]['content'] = $element->content; 
+                    }
                     $ret[$i]['user_id'] = $current_user;
                     $ret[$i]['slug'] = Str::slug($ret[$i]['title']); 
                     $ret[$i]['created_at'] = date('Y-m-d H:i:s');  
@@ -175,5 +178,62 @@ class BlogController extends Controller
         }  
         return abort(500);
         
+    }
+    
+    /**
+     * Show the form for importing csv a new resource.
+     */
+    public function import_csv()
+    {
+        return response()->view('blog.form_csv');
+    }
+
+    /**
+     * Submit form of importing csv in DB.
+     */
+    public function import_csv_submit(Request $request)
+    {
+        echo $rss_url = $request->rss_url;
+        $current_user = Auth::user()->id;
+        $data_csv = array();
+        if ($request->hasFile('csv_file')) {
+            // Read CSV file
+            $file = fopen(request()->file('csv_file'), 'r');
+            while (($line = fgetcsv($file)) !== FALSE) {
+              //$line is an array of the csv elements
+              $data_csv[] = $line;
+            }
+            fclose($file);
+            unset($data_csv[0]);
+            $data_csv = array_values($data_csv);
+        } 
+        $ret = array();
+        
+        // retrieve search results 
+        if(isset($data_csv[0])) {      
+            $i=0; 
+            foreach($data_csv as $key => $element) {                 
+                $ret[$i]['title'] = $element[0]; 
+                $ret[$i]['content'] = $element[1]; 
+                $ret[$i]['short_desc'] = $element[1]; 
+                if(isset($element[2])){                    
+                    $ret[$i]['featured_image'] = (string)$element[2]; 
+                }
+                $ret[$i]['user_id'] = $current_user;
+                $ret[$i]['slug'] = Str::slug($ret[$i]['title']); 
+                $ret[$i]['created_at'] = date('Y-m-d H:i:s');  
+                $ret[$i]['updated_at'] = date('Y-m-d H:i:s'); 
+                $i++;                
+            } 
+            // insert all csv entries in db
+            $create = Blog::insert($ret);
+            
+            if($create) {
+                // Alert flash for the success notification
+                session()->flash('notif.success', 'Blog created successfully!');
+                return redirect()->route('blogs_view');
+            }            
+        }  
+        return abort(500);        
     }
 }

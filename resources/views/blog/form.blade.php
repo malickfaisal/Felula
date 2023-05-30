@@ -59,7 +59,7 @@
                                 "/>
                             </label>
                             <div class="shrink-0 my-2">
-                                <img id="featured_image_preview" class="img object-cover rounded-md" src="{{ isset($blog->featured_image) ? $blog->featured_image : url('/images/no-preview.jpeg') }}" alt="Featured image preview" />
+                                <img id="featured_image_preview" class="img object-cover rounded-md" src="{{ isset($blog->featured_image) && ($blog->featured_image != '') ? $blog->featured_image : url('/images/no-preview.jpeg') }}" alt="Featured image preview" />
                             </div>
                             <x-input-error class="mt-2" :messages="$errors->get('featured_image')" />
                         </div>
