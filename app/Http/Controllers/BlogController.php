@@ -8,6 +8,7 @@ use App\Http\Requests\Blog\StoreRequest;
 use App\Http\Requests\Blog\UpdateRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 use Auth;
 
 class BlogController extends Controller
@@ -43,7 +44,9 @@ class BlogController extends Controller
             $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'));
             $validated['featured_image'] = $filePath;
         }
+        
         $validated['user_id'] = Auth::user()->id;
+        $validated['slug'] = Str::slug($request->title);
         
         // insert only requests that already validated in the StoreRequest
         $create = Blog::create($validated);
@@ -89,7 +92,8 @@ class BlogController extends Controller
 
             $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'), 'public');
             $validated['featured_image'] = $filePath;
-        }
+        }        
+        $validated['slug'] = Str::slug($request->title);
 
         $update = $blog->update($validated);
 
