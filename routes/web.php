@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/blog/{slug}', [FrontController::class, 'blog'])->name('blog');
+Route::post('/comment_submit', [FrontController::class, 'comment_submit'])->name('comment_submit');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
