@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ 'Users' }}
             </h2>
-            <a href="{{ route('users.create') }}" class="bg-current px-4 py-2 rounded-md">ADD USER</a>
+            <a href="{{ route('users.create') }}" class="btn-current px-4 py-2 rounded-md">ADD USER</a>
         </div>
     </x-slot>
 
