@@ -63,8 +63,22 @@
                             {{ $blog->updated_at }}
                         </p>
                     </div>
-                    <a href="{{ route('blogs_view') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">BACK</a>
-                </div>
+                    
+                    <h1 class="text-xl font-semibold text-gray-900 dark:text-white">Comments</h1>   
+                    @if(isset($comments) && count($comments) > 0)       
+                        @foreach($comments as $com)
+                        <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{$com->full_name}} : {{$com->created_at}}</p>
+
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                        {{ $com->comment }}
+                        </p>
+                        @endforeach
+                    @else
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            No Comments found.
+                        </p>
+                    @endif
+                    </div>
             </div>
         </div>
     </div>

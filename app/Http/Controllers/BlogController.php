@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\Blog\StoreRequest;
 use App\Http\Requests\Blog\UpdateRequest;
@@ -66,6 +67,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $data['blog'] = Blog::with('admin')->findOrFail($id);
+        $data['comments'] = Comment::where('blog_id', $id)->get();
         return response()->view('blog.show', $data);
     }
 
